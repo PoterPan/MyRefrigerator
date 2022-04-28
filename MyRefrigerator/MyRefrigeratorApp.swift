@@ -7,11 +7,26 @@
 
 import SwiftUI
 
+/*
+ MVVM
+ 
+ Model - data point
+ View - UI
+ ViewModel - Manages Models for View
+ */
+
 @main
 struct MyRefrigeratorApp: App {
+    
+    @StateObject var itemViewModel: ItemViewModel = ItemViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+                ContentView()
+                    .environmentObject(itemViewModel)
+            
         }
+
     }
 }
+
