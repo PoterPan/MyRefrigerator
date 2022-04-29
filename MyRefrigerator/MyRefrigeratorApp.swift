@@ -19,11 +19,15 @@ import SwiftUI
 struct MyRefrigeratorApp: App {
     
     @StateObject var itemViewModel: ItemViewModel = ItemViewModel()
+    @StateObject var wishViewModel: WishViewModel = WishViewModel()
+
     
     var body: some Scene {
         WindowGroup {
                 ContentView()
                     .environmentObject(itemViewModel)
+                    .environmentObject(wishViewModel)
+
             
         }
 

@@ -12,9 +12,17 @@ struct ItemRowView: View {
     @EnvironmentObject var itemViewModel: ItemViewModel
     let item: ItemModel
     
+    var image: UIImage {
+        do {
+            return try FileManager().readImage(with: item.id)
+        } catch {
+            return UIImage(systemName: "photo.fill")!
+        }
+    }
+    
     var body: some View {
         HStack {
-            Image(item.image)
+            Image(uiImage: image)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 80, height: 80)
@@ -36,8 +44,8 @@ struct ItemRowView: View {
 
 struct ItemRowView_Previews: PreviewProvider {
     
-    static var item1 = ItemModel(name: "蘋果", type: "水果", image: "apple", price: 40, purchaseDate: Date(), haveExp: true, exp: Date())
-    static var item2 = ItemModel(name: "牛排", type: "肉類食材", image: "beef", price: 500, purchaseDate: Date(), haveExp: true, exp: Date())
+    static var item1 = ItemModel(name: "蘋果", type: "水果", price: 40, purchaseDate: Date(), haveExp: true, exp: Date())
+    static var item2 = ItemModel(name: "牛排", type: "肉類食材", price: 500, purchaseDate: Date(), haveExp: true, exp: Date())
     static var previews: some View {
         Group {
             ItemRowView(item: item1)

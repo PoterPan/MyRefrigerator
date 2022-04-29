@@ -26,6 +26,8 @@
 		E7D2FF8627EF00AF00764266 /* MyRefrigeratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D2FF8527EF00AF00764266 /* MyRefrigeratorTests.swift */; };
 		E7D2FF9027EF00AF00764266 /* MyRefrigeratorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D2FF8F27EF00AF00764266 /* MyRefrigeratorUITests.swift */; };
 		E7D2FF9227EF00AF00764266 /* MyRefrigeratorUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D2FF9127EF00AF00764266 /* MyRefrigeratorUITestsLaunchTests.swift */; };
+		E7FDDD9F281C60DD000F65C7 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDDD9E281C60DD000F65C7 /* FileManager+Extension.swift */; };
+		E7FDDDA1281C6341000F65C7 /* MyImageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FDDDA0281C6341000F65C7 /* MyImageError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +70,8 @@
 		E7D2FF8B27EF00AF00764266 /* MyRefrigeratorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyRefrigeratorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7D2FF8F27EF00AF00764266 /* MyRefrigeratorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRefrigeratorUITests.swift; sourceTree = "<group>"; };
 		E7D2FF9127EF00AF00764266 /* MyRefrigeratorUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRefrigeratorUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E7FDDD9E281C60DD000F65C7 /* FileManager+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
+		E7FDDDA0281C6341000F65C7 /* MyImageError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyImageError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +119,7 @@
 			children = (
 				E797398527F4AD5A00D3B1FE /* itemModel.swift */,
 				E78702002809D7CF00298332 /* wishModel.swift */,
+				E7FDDDA0281C6341000F65C7 /* MyImageError.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -122,10 +127,18 @@
 		E797398727F71DDC00D3B1FE /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				E797398827F71E1700D3B1FE /* ItemViewModel.swift */,
 				E78702022809D83500298332 /* WishViewModel.swift */,
+				E797398827F71E1700D3B1FE /* ItemViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		E7C4A55E281C565000B41116 /* UIViewRepresentables */ = {
+			isa = PBXGroup;
+			children = (
+				E7C4A55C281AE6A200B41116 /* ImagePicker.swift */,
+			);
+			path = UIViewRepresentables;
 			sourceTree = "<group>";
 		};
 		E7D2FF6827EF00AE00764266 = {
@@ -155,9 +168,10 @@
 				E797398427F4AD2200D3B1FE /* Models */,
 				E797398727F71DDC00D3B1FE /* ViewModels */,
 				E797397927F3739E00D3B1FE /* Views */,
+				E7C4A55E281C565000B41116 /* UIViewRepresentables */,
+				E7FDDD9D281C60A4000F65C7 /* Extensions */,
 				E7D2FF7827EF00AF00764266 /* Assets.xcassets */,
 				E7D2FF7A27EF00AF00764266 /* Preview Content */,
-				E7C4A55C281AE6A200B41116 /* ImagePicker.swift */,
 			);
 			path = MyRefrigerator;
 			sourceTree = "<group>";
@@ -185,6 +199,14 @@
 				E7D2FF9127EF00AF00764266 /* MyRefrigeratorUITestsLaunchTests.swift */,
 			);
 			path = MyRefrigeratorUITests;
+			sourceTree = "<group>";
+		};
+		E7FDDD9D281C60A4000F65C7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E7FDDD9E281C60DD000F65C7 /* FileManager+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -317,6 +339,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7FDDDA1281C6341000F65C7 /* MyImageError.swift in Sources */,
 				E797398127F3783300D3B1FE /* CartView.swift in Sources */,
 				E797398927F71E1700D3B1FE /* ItemViewModel.swift in Sources */,
 				E7D2FF7727EF00AE00764266 /* ContentView.swift in Sources */,
@@ -328,6 +351,7 @@
 				E797398627F4AD5A00D3B1FE /* itemModel.swift in Sources */,
 				E797397D27F3743600D3B1FE /* ItemView.swift in Sources */,
 				E78702012809D7CF00298332 /* wishModel.swift in Sources */,
+				E7FDDD9F281C60DD000F65C7 /* FileManager+Extension.swift in Sources */,
 				E78702032809D83500298332 /* WishViewModel.swift in Sources */,
 				E78702052809D93300298332 /* WishRowView.swift in Sources */,
 				E7D2FF7527EF00AE00764266 /* MyRefrigeratorApp.swift in Sources */,
@@ -492,6 +516,8 @@
 				DEVELOPMENT_TEAM = WTV7G438ZG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "測試中";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -521,6 +547,8 @@
 				DEVELOPMENT_TEAM = WTV7G438ZG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "測試中";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

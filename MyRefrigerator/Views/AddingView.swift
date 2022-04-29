@@ -11,6 +11,7 @@ struct AddingView: View {
     
     @EnvironmentObject var itemViewModel: ItemViewModel
     
+    
     @State var newName: String = ""
     @State var newType: String = ""
     @State var newImage: String = ""
@@ -20,29 +21,73 @@ struct AddingView: View {
     @State private var selectedName = "其他"
     @State var newPurchaseDate: Date = Date()
     @State var newExp: Date = Date()
-
+    
+    @State private var isShowPhotoLibrary = false
+    @State private var image = UIImage()
+    
     @FocusState private var isFocused: Bool
     
     @State var alertTitle: String = ""
     @State var showAlert: Bool = false
-
+    
     //    var items: [itemModel]
-
+    
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack(alignment: .leading) {
-                    HStack {
-                        Text("商品名稱：")
-                        Spacer()
-                        TextField("", text: $newName)
-    //                        .textFieldStyle(.roundedBorder)
-                            .frame(width: 200, height: 35)
-                            .background(Color(UIColor.secondarySystemBackground))
-                            .cornerRadius(10)
-                            .focused($isFocused)
-
+                    HStack{
+                        
+                        Button {
+                            
+                            self.isShowPhotoLibrary = true
+                            
+                        } label: {
+                            Image(uiImage: self.image)
+                                .resizable()
+                                .cornerRadius(20)
+                                .frame(width: 100, height: 100)
+                                .background{
+                                    Image(systemName: "photo.fill")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 80)
+                                        .padding(.trailing, 10)
+                                }
+                                .aspectRatio(contentMode: .fill)
+                            
+                        }
+                        
+                        VStack{
+                            HStack {
+                                Text("商品名稱：")
+                                //                                Spacer()
+                                TextField("", text: $newName)
+                                //                        .textFieldStyle(.roundedBorder)
+                                    .frame(maxWidth: .infinity, minHeight: 35)
+                                    .background(Color(UIColor.secondarySystemBackground))
+                                    .cornerRadius(10)
+                                    .focused($isFocused)
+                                
+                            }
+                            HStack {
+                                Text("購入價格：")
+                                //                                Spacer()
+                                TextField("", value: $newPrice, format: .number)
+                                    .keyboardType(.decimalPad)
+                                    .frame(maxWidth: .infinity, minHeight: 35)
+                                    .background(Color(UIColor.secondarySystemBackground))
+                                //                            .background(Color(#colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)))
+                                    .cornerRadius(10)
+                                    .focused($isFocused)
+                                
+                            }
+                        }
                     }
+                    .sheet(isPresented: $isShowPhotoLibrary) {
+                        ImagePicker(sourceType: .camera, selectedImage: self.$image)
+                    }
+                    
                     HStack {
                         Text("類型：")
                         Spacer()
@@ -61,20 +106,8 @@ struct AddingView: View {
                                 .stroke(Color.blue, lineWidth: 3)
                         )
                     }
-//                    Text("當前選中項：\(selectedName)")
-
-                    HStack {
-                        Text("購入價格：")
-                        Spacer()
-                        TextField("", value: $newPrice, format: .number)
-                            .keyboardType(.decimalPad)
-                            .frame(width: 200, height: 35)
-                            .background(Color(UIColor.secondarySystemBackground))
-//                            .background(Color(#colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)))
-                            .cornerRadius(10)
-                            .focused($isFocused)
-
-                    }
+                    //                    Text("當前選中項：\(selectedName)")
+                    
                     
                     DatePicker("購買日期", selection: $newPurchaseDate, displayedComponents: .date)
                     
@@ -82,7 +115,7 @@ struct AddingView: View {
                         .padding(.vertical, 5.0)
                     
                     DatePicker("有效期限", selection: $newExp, displayedComponents: .date)
-
+                    
                     
                     Button (action: {
                         saveButtonPressed()
@@ -97,7 +130,7 @@ struct AddingView: View {
                             .background(Color.accentColor)
                             .cornerRadius(10)
                             .padding()
-
+                        
                     }
                     
                     Button (action: {
@@ -113,9 +146,9 @@ struct AddingView: View {
                             .background(Color.gray)
                             .cornerRadius(10)
                             .padding()
-
+                        
                     }
-
+                    
                 }
                 .padding(16)
                 .navigationTitle("新增物品")
@@ -133,7 +166,7 @@ struct AddingView: View {
                             selectedName = "其他"
                             newPurchaseDate = Date()
                             newExp = Date()
-
+                            
                             isFocused = false
                         }) {
                             Image(systemName: "xmark.circle.fill")
@@ -163,7 +196,7 @@ struct AddingView: View {
     }
     func saveButtonPressed() {
         if textIsExist() {
-            itemViewModel.addItem(name: newName, type: newType, price: newPrice, purchaseDate:newPurchaseDate, haveExp: newhaveExp, exp: newExp)
+            itemViewModel.addItem(name: newName, type: newType, price: newPrice, purchaseDate:newPurchaseDate, haveExp: newhaveExp, exp: newExp, image: image)
             
         }
         

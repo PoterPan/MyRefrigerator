@@ -31,8 +31,8 @@ struct ContentView: View {
                 }
             }
         }
-        .environmentObject(ItemViewModel())
-        .environmentObject(WishViewModel())
+//        .environmentObject(ItemViewModel())
+//        .environmentObject(WishViewModel())
 
     }
 }

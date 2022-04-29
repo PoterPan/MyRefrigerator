@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 // CRUD
 // Create Read Update Delete
@@ -20,8 +21,19 @@ class ItemViewModel: ObservableObject {
     
     let itemsKey: String = "items_list"
     
+    @Published var image: UIImage?
+    @Published var imageName: String = ""
+    @Published var showFileAlert = false
+    @Published var appError: MyImageError.ErrorType?
+
+    
     init() {
         getItems()
+    }
+    
+    func reset() {
+        image = nil
+        imageName = ""
     }
     
     func createDefultItems() {
@@ -31,9 +43,9 @@ class ItemViewModel: ObservableObject {
         let someDateTime: Date = formatter.date(from: "2022/10/08")!
 
         let newItems = [
-            ItemModel(name: "蘋果", type: "Fruit", image: "apple", price: 100, purchaseDate: Date(), haveExp: true, exp: someDateTime),
-            ItemModel(name: "白菜", type: "Vegetable", image: "vegetable", price: 30, purchaseDate: Date(), haveExp: true, exp: Date(timeIntervalSinceReferenceDate: 0)),
-            ItemModel(name: "牛排", type: "Meat", image: "beef", price: 1023, purchaseDate: Date(), haveExp: true, exp: someDateTime)
+            ItemModel(name: "蘋果", type: "Fruit", price: 100, purchaseDate: Date(), haveExp: true, exp: someDateTime),
+            ItemModel(name: "白菜", type: "Vegetable", price: 30, purchaseDate: Date(), haveExp: true, exp: Date(timeIntervalSinceReferenceDate: 0)),
+            ItemModel(name: "牛排", type: "Meat", price: 1023, purchaseDate: Date(), haveExp: true, exp: someDateTime)
             
         ]
         items.append(contentsOf: newItems)
@@ -57,9 +69,15 @@ class ItemViewModel: ObservableObject {
         items.move(fromOffsets: from, toOffset: to)
     }
     
-    func addItem(name: String, type: String, price: Double, purchaseDate: Date, haveExp: Bool, exp: Date) {
-        let newItem = ItemModel(name: name, type: type, image: "", price: price, purchaseDate: purchaseDate, haveExp: haveExp, exp: exp)
-        items.append(newItem)
+    func addItem(name: String, type: String, price: Double, purchaseDate: Date, haveExp: Bool, exp: Date, image: UIImage) {
+        let newItem = ItemModel(name: name, type: type, price: price, purchaseDate: purchaseDate, haveExp: haveExp, exp: exp)
+        do {
+            try FileManager().saveImage("\(newItem.id)", image: image)
+            items.append(newItem)
+        } catch {
+            showFileAlert = true
+            appError = MyImageError.ErrorType(error: error as! MyImageError)
+        }
     }
     
     func saveItems() {
@@ -68,5 +86,6 @@ class ItemViewModel: ObservableObject {
         }
     }
     
+        
     
 }
