@@ -111,10 +111,12 @@ struct AddingView: View {
                     
                     DatePicker("購買日期", selection: $newPurchaseDate, displayedComponents: .date)
                     
-                    Toggle("存在有效期限", isOn: $newhaveExp)
+                    Toggle("存在有效期限", isOn: $newhaveExp.animation())
                         .padding(.vertical, 5.0)
                     
-                    DatePicker("有效期限", selection: $newExp, displayedComponents: .date)
+                    if newhaveExp {
+                        DatePicker("有效期限", selection: $newExp, displayedComponents: .date)
+                    }
                     
                     
                     Button (action: {
@@ -192,6 +194,7 @@ struct AddingView: View {
             if image.size.width == 0 {
                 image = UIImage(systemName: "photo.fill")!
             }
+            
             itemViewModel.addItem(name: newName, type: newType, price: newPrice, purchaseDate:newPurchaseDate, haveExp: newhaveExp, exp: newExp, image: image)
             resetItem()
             

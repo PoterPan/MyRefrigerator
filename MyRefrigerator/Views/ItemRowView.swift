@@ -33,7 +33,9 @@ struct ItemRowView: View {
                 
                 Text("購入價格 \(item.price, specifier: "%.0f")元")
                 Text("購買日期 \(item.purchaseDate.formatted(date: .numeric, time: .omitted))")
-                Text("有效期限 \(item.exp.formatted(date: .numeric, time: .omitted))")
+                if item.haveExp {
+                    Text("有效期限 \(item.exp.formatted(date: .numeric, time: .omitted))")
+                }
             }
         }
         .padding(3)

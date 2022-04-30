@@ -22,7 +22,7 @@ struct ItemView: View {
                         ScrollView (.horizontal) {
                             HStack {
                                 ForEach(itemViewModel.items) { item in
-                                    if item.exp<nowDate {
+                                    if item.haveExp && item.exp<nowDate {
                                         ItemBlockView(item: item)
                                     }
                                 }
