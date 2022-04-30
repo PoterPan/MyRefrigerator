@@ -158,14 +158,7 @@ struct AddingView: View {
                     ToolbarItemGroup(placement: .navigationBarLeading){
                         //                    closeView
                         Button(action: {
-                            newName = ""
-                            newType = ""
-                            newImage = ""
-                            newPrice = 0.0
-                            newhaveExp = true
-                            selectedName = "其他"
-                            newPurchaseDate = Date()
-                            newExp = Date()
+                            resetItem()
                             
                             isFocused = false
                         }) {
@@ -196,7 +189,11 @@ struct AddingView: View {
     }
     func saveButtonPressed() {
         if textIsExist() {
+            if image.size.width == 0 {
+                image = UIImage(systemName: "photo.fill")!
+            }
             itemViewModel.addItem(name: newName, type: newType, price: newPrice, purchaseDate:newPurchaseDate, haveExp: newhaveExp, exp: newExp, image: image)
+            resetItem()
             
         }
         
@@ -213,6 +210,20 @@ struct AddingView: View {
     
     func getAlert() -> Alert {
         return Alert(title:  Text(alertTitle))
+    }
+    
+    func resetItem() {
+        newName = ""
+        newType = ""
+        newImage = ""
+        newPrice = 0.0
+        newhaveExp = true
+        selectedName = "其他"
+        newPurchaseDate = Date()
+        newExp = Date()
+        image = UIImage()
+        itemViewModel.reset()
+        
     }
 }
 

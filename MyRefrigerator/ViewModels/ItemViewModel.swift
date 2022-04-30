@@ -22,7 +22,6 @@ class ItemViewModel: ObservableObject {
     let itemsKey: String = "items_list"
     
     @Published var image: UIImage?
-    @Published var imageName: String = ""
     @Published var showFileAlert = false
     @Published var appError: MyImageError.ErrorType?
 
@@ -33,7 +32,6 @@ class ItemViewModel: ObservableObject {
     
     func reset() {
         image = nil
-        imageName = ""
     }
     
     func createDefultItems() {
